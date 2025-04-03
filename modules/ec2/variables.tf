@@ -13,6 +13,11 @@ variable "subnet_id" {
   type        = string
 }
 
+variable "ec2_security_group" {
+  description = "sg for ec2"
+  type        = string
+}
+
 variable "ebs_volume_type" {
   description = "type of instance ebs volume"
   type        = string
