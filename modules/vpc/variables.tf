@@ -25,5 +25,5 @@ variable "private_subnet_cidrs" {
 
 variable "aws_region" {
   type        = string
-  description = "region in aws"
+  description = "region for deploye vpc"
 }
