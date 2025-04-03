@@ -86,3 +86,61 @@ resource "aws_route_table_association" "private_rt_association" {
   route_table_id = aws_route_table.private_rt.id
 }
 
+# Network ACL Section 
+resource "aws_network_acl" "vpc_acl" {
+  vpc_id = aws_vpc.main_vpc.id
+  tags = {
+    Name = "${var.vpc_name}-NACL"
+  }
+}
+
+resource "aws_network_acl_rule" "public_http_inbound" {
+  network_acl_id = aws_network_acl.vpc_acl.id
+  rule_number    = 100
+  rule_action    = "allow"
+  protocol       = "6"
+  egress         = false
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 80
+  to_port        = 80
+}
+
+resource "aws_network_acl_rule" "public_https_inbound" {
+  network_acl_id = aws_network_acl.vpc_acl.id
+  rule_number    = 110
+  rule_action    = "allow"
+  protocol       = "6"
+  egress         = false
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 443
+  to_port        = 443
+}
+
+resource "aws_network_acl_rule" "public_ssh_inbound" {
+  network_acl_id = aws_network_acl.vpc_acl.id
+  rule_number    = 120
+  rule_action    = "allow"
+  protocol       = "6" #TCP 
+  egress         = false
+  cidr_block     = "0.0.0.0/0"
+  from_port      = 22
+  to_port        = 22
+}
+
+resource "aws_network_acl_rule" "public_deny_all_inbound" {
+  network_acl_id = aws_network_acl.vpc_acl.id
+  rule_number    = 300
+  rule_action    = "deny"
+  protocol       = "-1"
+  egress         = false
+  cidr_block     = "0.0.0.0/0"
+}
+
+resource "aws_network_acl_rule" "public_allow_all_outbound" {
+  network_acl_id = aws_network_acl.vpc_acl.id
+  rule_number    = 200
+  rule_action    = "allow"
+  protocol       = "-1"
+  egress         = true
+  cidr_block     = "0.0.0.0/0"
+}
