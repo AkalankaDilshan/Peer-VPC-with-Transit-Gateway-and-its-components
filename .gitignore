@@ -5,6 +5,8 @@
 *.tfstate
 *.tfstate.*
 
+# ignore res files
+res/*
 # Crash log files
 crash.log
 crash.*.log
