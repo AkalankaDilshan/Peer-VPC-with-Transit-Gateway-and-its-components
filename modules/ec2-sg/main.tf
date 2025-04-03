@@ -18,6 +18,7 @@ resource "aws_security_group_rule" "allow_ssh" {
 }
 
 resource "aws_security_group_rule" "allow_HTTP" {
+  count             = var.is_allow_http ? 1 : 0
   type              = "ingress"
   description       = "allow HTTP ingress"
   from_port         = 80
@@ -28,6 +29,7 @@ resource "aws_security_group_rule" "allow_HTTP" {
 }
 
 resource "aws_security_group_rule" "allow_HTTPS" {
+  count             = var.is_allow_https ? 1 : 0
   type              = "ingress"
   description       = "allow HTTPS ingress"
   from_port         = 443
