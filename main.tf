@@ -1,23 +1,30 @@
 provider "aws" {
-  region = var.region
+  alias  = "region1"
+  region = "eu-north-1"
 }
 
+provider "aws" {
+  alias  = "region2"
+  region = "eu-west-1"
+}
 
 module "vpc_A" {
-  source               = "./modules/vpc"
-  vpc_name             = "VPC-A"
-  cidr_block           = "192.173.0.0/16"
-  aws_region           = "eu-north-1" // default region 
+  source     = "./modules/vpc"
+  providers  = { aws = aws.region1 }
+  vpc_name   = "VPC-A"
+  cidr_block = "192.173.0.0/16"
+  # aws_region           = "eu-north-1" // default region 
   availability_zones   = "eu-north-1a"
   public_subnet_cidr   = "192.173.1.0/24"
   private_subnet_cidrs = "192.173.3.0/24"
 }
 
 module "vpc_B" {
-  source               = "./modules/vpc"
-  vpc_name             = "VPC-B"
-  cidr_block           = "172.16.0.0/16"
-  aws_region           = "eu-west-1"
+  source     = "./modules/vpc"
+  providers  = { aws = aws.region2 }
+  vpc_name   = "VPC-B"
+  cidr_block = "172.16.0.0/16"
+  # aws_region           = "eu-west-1"
   availability_zones   = "eu-west-1a"
   public_subnet_cidr   = "172.16.1.0/24"
   private_subnet_cidrs = "172.16.3.0/24"

@@ -23,7 +23,7 @@ variable "private_subnet_cidrs" {
   description = "cidr values for private subnet"
 }
 
-variable "aws_region" {
-  type        = string
-  description = "region for deploye vpc"
-}
+# variable "aws_region" {
+#   type        = string
+#   description = "region for deploye vpc"
+# }
