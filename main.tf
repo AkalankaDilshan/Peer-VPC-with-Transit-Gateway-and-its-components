@@ -52,19 +52,6 @@ module "public_instance" {
   depends_on         = [module.public_security_group, module.vpc_A]
 }
 
-module "public_instance" {
-  source             = "./modules/ec2"
-  instance_name      = "public_instance"
-  instance_type      = "t3.micro"
-  subnet_id          = module.vpc_A.public_subnet_id
-  ec2_security_group = module.public_security_group.security_group_id
-  is_allow_public_ip = true
-  ebs_volume_type    = "gp2"
-  ebs_volume_size    = 8
-  key_pair_name      = "gateway-project-key-pair"
-  depends_on         = [module.public_security_group, module.vpc_A]
-}
-
 module "private_instance" {
   source             = "./modules/ec2"
   instance_name      = "private_instance"
