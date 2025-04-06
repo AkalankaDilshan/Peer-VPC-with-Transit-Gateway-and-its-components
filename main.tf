@@ -1,16 +1,20 @@
 provider "aws" {
-  alias  = "region1"
-  region = "eu-north-1"
+  alias = "eu-west-1"
+
+  region = "eu-west-1"
 }
 
 provider "aws" {
-  alias  = "region2"
-  region = "eu-west-1"
+  alias = "eu-south-1"
+
+  region = "eu-south-1"
 }
 
 module "vpc_A" {
   source     = "./modules/vpc"
-  providers  = { aws = aws.region1 }
+  providers = {
+    aws = aws.eu-west-1
+  }
   vpc_name   = "VPC-A"
   cidr_block = "192.173.0.0/16"
   # aws_region           = "eu-north-1" // default region 
