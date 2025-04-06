@@ -32,6 +32,20 @@ module "vpc_B" {
   private_subnet_cidrs = "172.16.3.0/24"
 }
 
+module "transit_gateway" {
+  source              = "./modules/transit-gateway"
+  vpc_a_id            = module.vpc_A.vpc_id
+  vpc_b_id            = module.vpc_B.vpc_id
+  vpc_a_cidr          = module.vpc_A.vpc_cidr
+  vpc_b_cidr          = module.vpc_B.vpc_cidr
+  vpc_a_subnet_ids    = [module.vpc_A.public_subnet_id]
+  vpc_b_subnet_ids    = [module.vpc_B.private_subnet_id]
+  vpc_a_public_rt_id  = module.vpc_A.public_rt_id
+  vpc_a_private_rt_id = module.vpc_A.private_rt_id
+  vpc_b_public_rt_id  = module.vpc_B.public_rt_id
+  vpc_b_private_rt_id = module.vpc_B.private_rt_id
+  depends_on          = [module.vpc_A, module.vpc_B]
+}
 module "public_security_group" {
   source              = "./modules/ec2-sg"
   security_group_name = "public_security_group"
@@ -75,17 +89,4 @@ module "private_instance" {
 }
 
 
-module "transit_gateway" {
-  source              = "./modules/transit-gateway"
-  vpc_a_id            = module.vpc_A.vpc_id
-  vpc_b_id            = module.vpc_B.vpc_id
-  vpc_a_cidr          = module.vpc_A.vpc_cidr
-  vpc_b_cidr          = module.vpc_B.vpc_cidr
-  vpc_a_subnet_ids    = [module.vpc_A.public_subnet_id, module.vpc_A.private_subnet_id]
-  vpc_b_subnet_ids    = [module.vpc_B.public_subnet_id, module.vpc_B.private_subnet_id]
-  vpc_a_public_rt_id  = module.vpc_A.public_rt_id
-  vpc_a_private_rt_id = module.vpc_A.private_rt_id
-  vpc_b_public_rt_id  = module.vpc_B.public_rt_id
-  vpc_b_private_rt_id = module.vpc_B.private_rt_id
-  depends_on          = [module.vpc_A, module.vpc_B]
-}
+
