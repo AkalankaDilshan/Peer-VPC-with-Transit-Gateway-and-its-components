@@ -87,4 +87,5 @@ module "transit_gateway" {
   vpc_a_private_rt_id = module.vpc_A.private_rt_id
   vpc_b_public_rt_id  = module.vpc_B.public_rt_id
   vpc_b_private_rt_id = module.vpc_B.private_rt_id
+  depends_on          = [module.vpc_A, module.vpc_B]
 }
