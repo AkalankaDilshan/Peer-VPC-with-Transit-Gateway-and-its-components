@@ -57,7 +57,7 @@ module "public_instance" {
   is_allow_public_ip = true
   ebs_volume_type    = "gp2"
   ebs_volume_size    = 8
-  key_pair_name      = "moba-key"
+  key_pair_name      = "server-key"
   depends_on         = [module.public_security_group, module.vpc_A]
 }
 
@@ -70,6 +70,6 @@ module "private_instance" {
   is_allow_public_ip = true
   ebs_volume_type    = "gp2"
   ebs_volume_size    = 8
-  key_pair_name      = "moba-key"
+  key_pair_name      = "server-key"
   depends_on         = [module.private_security_group, module.vpc_B]
 }
