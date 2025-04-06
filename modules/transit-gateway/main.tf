@@ -51,6 +51,6 @@ resource "aws_route" "vpc_b_to_tgw_public_rt" {
 
 resource "aws_route" "vpc_b_to_tgw_private_rt" {
   route_table_id         = var.vpc_b_private_rt_id
-  destination_cidr_block = var.vpc_b_cidr
+  destination_cidr_block = var.vpc_a_cidr
   transit_gateway_id     = aws_ec2_transit_gateway.tgw.id
 }
