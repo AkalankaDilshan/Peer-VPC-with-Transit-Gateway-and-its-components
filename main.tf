@@ -66,7 +66,7 @@ module "public_instance_vpc_a" {
   instance_name      = "public_instance_vpc_a"
   instance_type      = "t3.micro"
   subnet_id          = module.vpc_A.public_subnet_id[0]
-  ec2_security_group = module.public_security_group.security_group_id
+  ec2_security_group = module.public_security_group_vpc_a.security_group_id
   is_allow_public_ip = true
   ebs_volume_type    = "gp2"
   ebs_volume_size    = 8
@@ -79,7 +79,7 @@ module "public_instance_vpc_b" {
   instance_name      = "public_instance_vpc_b"
   instance_type      = "t3.micro"
   subnet_id          = module.vpc_B.public_subnet_id[0]
-  ec2_security_group = module.public_security_group.security_group_id
+  ec2_security_group = module.public_security_group_vpc_b.security_group_id
   is_allow_public_ip = true
   ebs_volume_type    = "gp2"
   ebs_volume_size    = 8
