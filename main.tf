@@ -1,6 +1,11 @@
 provider "aws" {
   region = "eu-north-1"
 }
+
+module "transit_gateway" {
+  source       = "./modules/transit-gateway"
+  gateway_name = "test-tgw"
+}
 module "vpc_A" {
   source               = "./modules/vpc"
   vpc_name             = "VPC-A"
@@ -9,8 +14,9 @@ module "vpc_A" {
   public_subnet_cidr   = ["192.173.1.0/24", "192.173.2.0/24"]
   private_subnet_cidrs = ["192.173.3.0/24", "192.173.4.0/24"]
   enable_NAT_gateway   = true
+  transit_gateway_id   = module.transit_gateway.transit_gateway_id
+  depends_on           = [module.transit_gateway]
 }
-
 module "vpc_B" {
   source               = "./modules/vpc"
   vpc_name             = "VPC-B"
@@ -19,23 +25,10 @@ module "vpc_B" {
   public_subnet_cidr   = ["172.16.1.0/24", "172.16.2.0/24"]
   private_subnet_cidrs = ["172.16.3.0/24", "172.16.4.0/24"]
   enable_NAT_gateway   = true
+  transit_gateway_id   = module.transit_gateway.transit_gateway_id
+  depends_on           = [module.transit_gateway]
 }
 
-module "transit_gateway" {
-  source       = "./modules/transit-gateway"
-  gateway_name = "test-tgw"
-  # vpc_a_id            = module.vpc_A.vpc_id
-  # vpc_b_id            = module.vpc_B.vpc_id
-  # vpc_a_cidr          = module.vpc_A.vpc_cidr
-  # vpc_b_cidr          = module.vpc_B.vpc_cidr
-  # vpc_a_subnet_ids    = [module.vpc_A.public_subnet_id]
-  # vpc_b_subnet_ids    = [module.vpc_B.private_subnet_id]
-  # vpc_a_public_rt_id  = module.vpc_A.public_rt_id
-  # vpc_a_private_rt_id = module.vpc_A.private_rt_id
-  # vpc_b_public_rt_id  = module.vpc_B.public_rt_id
-  # vpc_b_private_rt_id = module.vpc_B.private_rt_id
-  depends_on = [module.vpc_A, module.vpc_B]
-}
 module "public_security_group_vpc_a" {
   source              = "./modules/ec2-sg"
   security_group_name = "public_security_group_vpc_a"
