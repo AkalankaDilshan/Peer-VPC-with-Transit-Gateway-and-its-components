@@ -159,5 +159,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "vpc_attachment" {
   transit_gateway_id = var.transit_gateway_id
   vpc_id             = aws_vpc.main_vpc.id
   dns_support        = "enable"
-  tags               = "tgw-${var.vpc_name}-attachment"
+  tags = {
+    Name = "tgw-${var.vpc_name}-attachment"
+  }
 }
