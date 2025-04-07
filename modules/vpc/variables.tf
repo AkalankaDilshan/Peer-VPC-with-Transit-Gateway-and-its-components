@@ -29,7 +29,7 @@ variable "enable_NAT_gateway" {
   default     = false
 }
 
-# variable "aws_region" {
-#   type        = string
-#   description = "region for deploye vpc"
-# }
+variable "transit_gateway_id" {
+  description = "transit_gateway_id"
+  type        = string
+}

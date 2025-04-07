@@ -86,12 +86,6 @@ resource "aws_route_table" "private_rt" {
   }
 }
 
-# resource "aws_route" "private_route" {
-#   route_table_id         = aws_route_table.private_rt.id
-#   destination_cidr_block = "0.0.0.0/0"
-#   nat_gateway_id         = aws_nat_gateway.nat_gateway.id
-# }
-
 resource "aws_route_table_association" "private_rt_association" {
   count          = length(var.private_subnet_cidrs)
   subnet_id      = aws_subnet.private_subnet[count.index].id
@@ -155,4 +149,15 @@ resource "aws_network_acl_rule" "public_allow_all_outbound" {
   protocol       = "-1"
   egress         = true
   cidr_block     = "0.0.0.0/0"
+}
+
+
+# Trasit gateway Attachment 
+
+resource "aws_ec2_transit_gateway_vpc_attachment" "vpc_attachment" {
+  subnet_ids         = concat(aws_subnet.public_subnet[*].id, aws_subnet.private_subnet[*].id)
+  transit_gateway_id = var.transit_gateway_id
+  vpc_id             = aws_vpc.main_vpc.id
+  dns_support        = "enable"
+  tags               = "tgw-${var.vpc_name}-attachment"
 }
