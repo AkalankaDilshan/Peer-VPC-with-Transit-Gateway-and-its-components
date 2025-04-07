@@ -10,17 +10,23 @@ variable "cidr_block" {
 
 variable "availability_zones" {
   description = "availability_zones"
-  type        = string
+  type        = list(string)
 }
 
 variable "public_subnet_cidr" {
   description = "CIDR for public subnet"
-  type        = string
+  type        = list(string)
 }
 
 variable "private_subnet_cidrs" {
-  type        = string
+  type        = list(string)
   description = "cidr values for private subnet"
+}
+
+variable "enable_NAT_gateway" {
+  type        = bool
+  description = "NAT gateway available or not"
+  default     = false
 }
 
 # variable "aws_region" {
