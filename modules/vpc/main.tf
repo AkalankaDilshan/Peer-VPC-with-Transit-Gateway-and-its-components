@@ -39,7 +39,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.main_vpc.id
   tags = {
-    Name = "${var.vpc_name}-public-rt-${count.index}"
+    Name = "${var.vpc_name}-public-rt"
   }
 }
 
