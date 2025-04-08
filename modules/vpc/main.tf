@@ -190,6 +190,7 @@ resource "aws_route" "tgw_peering_route_public" {
   route_table_id         = aws_route_table.public_rt.id
   destination_cidr_block = var.tgw_destination_cidr[count.index]
   gateway_id             = var.transit_gateway_id
+  depends_on             = [aws_ec2_transit_gateway_vpc_attachment.vpc_attachment, aws_route_table.public_rt]
 }
 
 #******for private subnets*************
