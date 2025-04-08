@@ -133,6 +133,17 @@ resource "aws_network_acl_rule" "public_ssh_inbound" {
   to_port        = 22
 }
 
+resource "aws_network_acl_rule" "public_icmp_inbound" {
+  network_acl_id = aws_network_acl.vpc_acl.id
+  rule_number    = 90
+  rule_action    = "allow"
+  protocol       = "1" # ICMP
+  egress         = false
+  cidr_block     = "0.0.0.0/0" # Or the CIDR of the *other* VPC
+  from_port      = -1
+  to_port        = -1
+}
+
 resource "aws_network_acl_rule" "public_deny_all_inbound" {
   network_acl_id = aws_network_acl.vpc_acl.id
   rule_number    = 300
