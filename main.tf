@@ -45,7 +45,6 @@ module "public_security_group_vpc_b" {
   is_allow_https      = true
 }
 
-
 # module "private_security_group" {
 #   source              = "./modules/ec2-sg"
 #   security_group_name = "private_security_group"

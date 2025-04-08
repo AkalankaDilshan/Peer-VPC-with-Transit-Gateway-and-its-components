@@ -153,13 +153,19 @@ resource "aws_network_acl_rule" "public_allow_all_outbound" {
 
 
 # Trasit gateway Attachment 
+resource "aws_ec2_transit_gateway_vpc_attachment" "vpc_attachment" {
+  subnet_ids         = aws_subnet.private_subnet[0].id
+  transit_gateway_id = var.transit_gateway_id
+  vpc_id             = aws_vpc.main_vpc.id
+  dns_support        = "enable"
+  tags = {
+    Name = "tgw-${var.vpc_name}-attachment"
+  }
+}
 
-# resource "aws_ec2_transit_gateway_vpc_attachment" "vpc_attachment" {
-#   subnet_ids         = concat(aws_subnet.public_subnet[*].id, aws_subnet.private_subnet[*].id)
-#   transit_gateway_id = var.transit_gateway_id
-#   vpc_id             = aws_vpc.main_vpc.id
-#   dns_support        = "enable"
+# resource "aws_ec2_transit_gateway_vpc_attachment_accepter" "accept_vpc" {
+#   transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.vpc_attachment.id
 #   tags = {
-#     Name = "tgw-${var.vpc_name}-attachment"
+#     Name = "tgw-vpc-a-accepter"
 #   }
 # }
