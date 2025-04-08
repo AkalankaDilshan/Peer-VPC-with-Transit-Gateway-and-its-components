@@ -154,7 +154,7 @@ resource "aws_network_acl_rule" "public_allow_all_outbound" {
 
 # Trasit gateway Attachment 
 resource "aws_ec2_transit_gateway_vpc_attachment" "vpc_attachment" {
-  subnet_ids         = [for s in aws_subnet.private_subnet : s.id if can(regex("az1|az2", s.availability_zone))] # Example: Filter 1 subnet per AZ
+  subnet_ids         = [for s in aws_subnet.private_subnet : s.id]
   transit_gateway_id = var.transit_gateway_id
   vpc_id             = aws_vpc.main_vpc.id
   dns_support        = "enable"
