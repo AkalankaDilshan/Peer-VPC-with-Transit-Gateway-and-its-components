@@ -3,10 +3,10 @@ variable "transit_gateway_id" {
   type        = string
 }
 
-variable "transit_gateway_attachment_id" {
-  description = "transit_gateway_attachment_id"
-  type        = string
-}
+# variable "transit_gateway_attachment_id" {
+#   description = "transit_gateway_attachment_id"
+#   type        = string
+# }
 
 variable "cloudwatch_log_group_arn" {
   description = "log group arn"
