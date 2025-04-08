@@ -79,12 +79,12 @@ module "public_instance_vpc_b" {
   depends_on         = [module.public_security_group_vpc_b, module.vpc_B]
 }
 
-module "update_route" {
-  source      = "./modules/update -RT"
-  vpc_a_id    = module.vpc_A.vpc_id
-  vpc_b_id    = module.vpc_A.vpc_id
-  tgw_id      = module.transit_gateway.transit_gateway_id
-  vpc_a_rt_id = module.vpc_B.public_rt_id
-  vpc_b_rt_id = module.vpc_A.public_rt_id
-  depends_on  = [module.transit_gateway, module.vpc_A, module.vpc_B]
-}
+# module "update_route" {
+#   source      = "./modules/update -RT"
+#   vpc_a_id    = module.vpc_A.vpc_id
+#   vpc_b_id    = module.vpc_A.vpc_id
+#   tgw_id      = module.transit_gateway.transit_gateway_id
+#   vpc_a_rt_id = module.vpc_B.public_rt_id
+#   vpc_b_rt_id = module.vpc_A.public_rt_id
+#   depends_on  = [module.transit_gateway, module.vpc_A, module.vpc_B]
+# }
