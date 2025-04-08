@@ -104,3 +104,27 @@ module "vpc_flow_log" {
   iam_role_arn             = module.vpc_flow_log_iam_role.vpc_iam_role_arn
   s3_bucket_arn            = module.vpc_flowlog_s3_bucket.bucket_arn
 }
+
+# Transit flow log section 
+module "transit_flowlog_s3_bucket" {
+  source        = "./modules/s3"
+  bucket_prefix = "tgw_flow_logs_bucket"
+}
+
+module "transit_flowlog_cloudwatch_logs_group" {
+  source         = "./modules/cloudWatch"
+  log_group_name = "tgw-flow-logs"
+}
+
+module "transit_flow_log_iam_role" {
+  source    = "./modules/transit-flow-log-iam-role"
+  role_name = "tgw-flow-log-role"
+}
+
+module "transit_flow_log" {
+  source                   = "./modules/transit-flow-log"
+  transit_gateway_id       = module.transit_gateway.transit_gateway_id
+  cloudwatch_log_group_arn = module.transit_flowlog_cloudwatch_logs_group.cloudwatch_log_group_arn
+  s3_bucket_arn            = module.vpc_flowlog_s3_bucket.bucket_arn
+  iam_role_arn             = module.transit_flow_log_iam_role
+}
