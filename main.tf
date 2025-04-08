@@ -81,3 +81,12 @@ module "public_instance_vpc_b" {
 
 
 
+
+module "update_route" {
+  source      = "./modules/update -RT"
+  vpc_a_id    = module.vpc_A.vpc_id
+  vpc_b_id    = module.vpc_A.vpc_id
+  tgw_id      = module.transit_gateway.transit_gateway_id
+  vpc_a_rt_id = module.vpc_B.public_rt_id
+  vpc_b_rt_id = module.vpc_A.public_rt_id
+}
