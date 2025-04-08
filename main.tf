@@ -10,9 +10,9 @@ module "vpc_A" {
   source               = "./modules/vpc"
   vpc_name             = "VPC-A"
   cidr_block           = "192.173.0.0/16"
-  availability_zones   = ["eu-north-1a", "eu-north-1b"]
-  public_subnet_cidr   = ["192.173.1.0/24", "192.173.2.0/24"]
-  private_subnet_cidrs = ["192.173.3.0/24", "192.173.4.0/24"]
+  availability_zones   = ["eu-north-1a"]
+  public_subnet_cidr   = ["192.173.1.0/24"]
+  private_subnet_cidrs = ["192.173.3.0/24"]
   enable_NAT_gateway   = true
   transit_gateway_id   = module.transit_gateway.transit_gateway_id
   depends_on           = [module.transit_gateway]
@@ -21,9 +21,9 @@ module "vpc_B" {
   source               = "./modules/vpc"
   vpc_name             = "VPC-B"
   cidr_block           = "172.16.0.0/16"
-  availability_zones   = ["eu-north-1b", "eu-north-1a"]
-  public_subnet_cidr   = ["172.16.1.0/24", "172.16.2.0/24"]
-  private_subnet_cidrs = ["172.16.3.0/24", "172.16.4.0/24"]
+  availability_zones   = ["eu-north-1a"]
+  public_subnet_cidr   = ["172.16.1.0/24"]
+  private_subnet_cidrs = ["172.16.3.0/24"]
   enable_NAT_gateway   = true
   transit_gateway_id   = module.transit_gateway.transit_gateway_id
   depends_on           = [module.transit_gateway]
