@@ -33,3 +33,8 @@ variable "transit_gateway_id" {
   description = "transit_gateway_id"
   type        = string
 }
+
+variable "tgw_destination_cidr" {
+  description = "vpc cidr for peering"
+  type        = list(string)
+}

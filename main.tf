@@ -15,6 +15,7 @@ module "vpc_A" {
   private_subnet_cidrs = ["192.173.3.0/24"]
   enable_NAT_gateway   = true
   transit_gateway_id   = module.transit_gateway.transit_gateway_id
+  tgw_destination_cidr = ["172.16.0.0/16"]
   depends_on           = [module.transit_gateway]
 }
 module "vpc_B" {
@@ -26,6 +27,7 @@ module "vpc_B" {
   private_subnet_cidrs = ["172.16.3.0/24"]
   enable_NAT_gateway   = true
   transit_gateway_id   = module.transit_gateway.transit_gateway_id
+  tgw_destination_cidr = ["192.173.0.0/16"]
   depends_on           = [module.transit_gateway]
 }
 

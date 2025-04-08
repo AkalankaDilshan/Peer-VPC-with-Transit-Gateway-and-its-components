@@ -181,3 +181,28 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "vpc_attachment" {
 #     Name = "tgw-vpc-a-accepter"
 #   }
 # }
+
+# update route for peering vpc through transit gateway 
+
+#*********for connect public subnet ec2s************
+resource "aws_route" "tgw_peering_route_public" {
+  count                  = length(var.tgw_destination_cidr)
+  route_table_id         = aws_route_table.public_rt.id
+  destination_cidr_block = var.tgw_destination_cidr[count.index]
+  gateway_id             = var.transit_gateway_id
+}
+
+#******for private subnets*************
+# resource "aws_route" "tgw_peering_route_private" {
+#   for_each = {
+#     for pair in setproduct(range(length(var.private_subnet_cidrs)), var.var.tgw_destination_cidr) :
+#     "${pair[0]}-${pair[1]}" => {
+#       rt_index = pair[0]
+#       cidr     = pair[1]
+#     }
+#   }
+
+#   route_table_id         = aws_route_table.private_rt[each.value.rt_index].id
+#   destination_cidr_block = each.value.cidr
+#   gateway_id             = var.transit_gateway_id
+# }
