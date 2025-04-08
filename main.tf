@@ -126,5 +126,5 @@ module "transit_flow_log" {
   transit_gateway_id       = module.transit_gateway.transit_gateway_id
   cloudwatch_log_group_arn = module.transit_flowlog_cloudwatch_logs_group.cloudwatch_log_group_arn
   s3_bucket_arn            = module.vpc_flowlog_s3_bucket.bucket_arn
-  iam_role_arn             = module.transit_flow_log_iam_role
+  iam_role_arn             = module.transit_flow_log_iam_role.vpc_iam_role_arn
 }
