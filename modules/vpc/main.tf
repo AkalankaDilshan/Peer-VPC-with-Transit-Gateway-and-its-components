@@ -161,6 +161,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "vpc_attachment" {
   tags = {
     Name = "tgw-${var.vpc_name}-attachment"
   }
+  depends_on = [aws_subnet.private_subnet]
 }
 
 # resource "aws_ec2_transit_gateway_vpc_attachment_accepter" "accept_vpc" {
