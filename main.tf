@@ -81,12 +81,26 @@ module "public_instance_vpc_b" {
   depends_on         = [module.public_security_group_vpc_b, module.vpc_B]
 }
 
-# module "update_route" {
-#   source      = "./modules/update -RT"
-#   vpc_a_id    = module.vpc_A.vpc_id
-#   vpc_b_id    = module.vpc_A.vpc_id
-#   tgw_id      = module.transit_gateway.transit_gateway_id
-#   vpc_a_rt_id = module.vpc_B.public_rt_id
-#   vpc_b_rt_id = module.vpc_A.public_rt_id
-#   depends_on  = [module.transit_gateway, module.vpc_A, module.vpc_B]
-# }
+# VPC flow log section 
+module "vpc_flowlog_s3_bucket" {
+  source        = "./modules/s3"
+  bucket_prefix = "vpc-flow-logs-bucket"
+}
+
+module "vpc_flowlog_cloudwatch_logs_group" {
+  source         = "./modules/cloudWatch"
+  log_group_name = "vpc-flow-logs"
+}
+
+module "vpc_flow_log_iam_role" {
+  source    = "./modules/vpc-flow-log-iam-role"
+  role_name = "vpc-flow-log-role"
+}
+
+module "vpc_flow_log" {
+  source                   = "./modules/vpc-flow-log"
+  vpc_ids                  = [module.vpc_A.vpc_id, module.vpc_B.vpc_id]
+  cloudwatch_log_group_arn = module.vpc_flowlog_cloudwatch_logs_group.cloudwatch_log_group_arn
+  iam_role_arn             = module.vpc_flow_log_iam_role.vpc_iam_role_arn
+  s3_bucket_arn            = module.vpc_flowlog_s3_bucket.bucket_arn
+}
