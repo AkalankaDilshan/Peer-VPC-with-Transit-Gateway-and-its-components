@@ -1,3 +1,4 @@
+#****************Traffic Anomalies********
 # ---1.METRIC FILTERS (high_rejected_connections)---
 resource "aws_cloudwatch_log_metric_filter" "high_rejected_connections" {
   name           = "HighRejectedConnections"
@@ -51,4 +52,35 @@ resource "aws_cloudwatch_metric_alarm" "high_bytes_in" {
   alarm_description   = "Traffic spike detected (possible DDos)"
   alarm_actions       = [var.sns_security_alerts_arn]
 }
+
+# Anomaly Detection 
+
+resource "aws_cloudwatch_metric_alarm" "bytes_in_anomaly_advance" {
+  alarm_name          = "Anomaloud-BytesIn"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  threshold_metric_id = "e1"
+  alarm_description   = "Traffic exceeds expected pattern (AWS anomaly detection)"
+  alarm_actions       = [var.sns_security_alerts_arn]
+
+  metric_query {
+    id          = "e1"
+    expression  = "ANOMALY_DETECTION_BAND(m1, 3)"
+    label       = "BytesIn (Expected Range)"
+    return_data = "true"
+  }
+
+  metric_query {
+    id = "m1"
+    metric {
+      metric_name = "BytesInPerMinute"
+      namespace   = "Custom/VPCFlowLogs"
+      period      = "300"
+      stat        = "Sum"
+    }
+  }
+}
+
+# TODO : Security Threats (Port Scans, Brute Force) metrics 
+
 
