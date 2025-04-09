@@ -57,7 +57,7 @@ resource "aws_cloudwatch_metric_alarm" "high_bytes_in" {
 
 resource "aws_cloudwatch_metric_alarm" "bytes_in_anomaly_advance" {
   alarm_name          = "Anomaloud-BytesIn"
-  comparison_operator = "GreaterThanThreshold"
+  comparison_operator = "GreaterThanUpperThreshold"
   evaluation_periods  = "1"
   threshold_metric_id = "e1"
   alarm_description   = "Traffic exceeds expected pattern (AWS anomaly detection)"
