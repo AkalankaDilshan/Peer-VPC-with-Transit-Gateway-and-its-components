@@ -15,6 +15,20 @@ resource "aws_s3_bucket" "flow_logs_bucket" {
   }
 }
 
+resource "aws_s3_bucket_policy" "flow_log_bucket_policy" {
+  bucket = aws_s3_bucket.flow_log_bucket.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow"
+        Principal = { Service = "delivery.logs.amazonaws.com" }
+        Action    = "s3:PutObject"
+        Resource  = "*"
+      }
+    ]
+  })
+}
 # resource "aws_s3_bucket_public_access_block" "bucket_access" {
 #   bucket = aws_s3_bucket.flow_logs_bucket.id
 
