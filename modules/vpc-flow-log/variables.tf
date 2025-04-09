@@ -17,3 +17,9 @@ variable "vpc_ids" {
   description = "all ids in vpcs"
   type        = list(string)
 }
+
+variable "s3_prefix" {
+  description = "Prefix for S3 flow logs"
+  type        = string
+  default     = "flow-logs"
+}
