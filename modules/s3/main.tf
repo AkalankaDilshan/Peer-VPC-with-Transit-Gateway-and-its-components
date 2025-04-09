@@ -10,13 +10,14 @@ resource "aws_s3_bucket" "flow_logs_bucket" {
   force_destroy = true
 
   tags = {
-    Name        = "${var.bucket_prefix}"
+    Name        = var.bucket_prefix
     Environment = var.environment
   }
 }
 
-resource "aws_s3_bucket_policy" "flow_log_bucket_policy" {
-  bucket = aws_s3_bucket.flow_log_bucket.id
+resource "aws_s3_bucket_policy" "flow_logs_bucket_policy" {
+  bucket = aws_s3_bucket.flow_logs_bucket.bucket
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -24,11 +25,12 @@ resource "aws_s3_bucket_policy" "flow_log_bucket_policy" {
         Effect    = "Allow"
         Principal = { Service = "delivery.logs.amazonaws.com" }
         Action    = "s3:PutObject"
-        Resource  = "*"
+        Resource  = "arn:aws:s3:::${aws_s3_bucket.flow_logs_bucket.bucket}/*"
       }
     ]
   })
 }
+
 # resource "aws_s3_bucket_public_access_block" "bucket_access" {
 #   bucket = aws_s3_bucket.flow_logs_bucket.id
 
