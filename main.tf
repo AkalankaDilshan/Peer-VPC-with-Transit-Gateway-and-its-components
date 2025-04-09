@@ -110,7 +110,7 @@ module "vpc_flow_log" {
 # Transit flow log section 
 module "transit_flowlog_s3_bucket" {
   source        = "./modules/s3"
-  bucket_prefix = "tgw_flow_logs_bucket"
+  bucket_prefix = "tgw-flow-logs-bucket"
 }
 
 module "transit_flowlog_cloudwatch_logs_group" {
