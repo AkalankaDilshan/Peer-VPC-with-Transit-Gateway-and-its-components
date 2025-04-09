@@ -128,3 +128,18 @@ module "transit_flow_log" {
   s3_bucket_arn            = module.vpc_flowlog_s3_bucket.bucket_arn
   iam_role_arn             = module.transit_flow_log_iam_role.vpc_iam_role_arn
 }
+
+
+# create sns 
+module "sns" {
+  source         = "./modules/sns"
+  email_endpoint = "akalankadilshan98@gmail.com" #add your email here
+}
+
+#create cloudwatch metrics 
+module "cloudwatch_metric" {
+  source                     = "./modules/cloudWatch"
+  vpc_flow_logs_name         = module.vpc_flowlog_cloudwatch_logs_group.cloudwatch_log_group_name
+  sns_security_alerts_arn    = module.sns.sns_security_alerts_arn
+  sns_performance_alerts_arn = module.sns.sns_performance_alerts_arn
+}

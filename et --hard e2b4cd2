@@ -1,0 +1,114 @@
+[33m2cf0c6d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33me2b4cd2[m HEAD@{1}: checkout: moving from main to main
+[33me2b4cd2[m HEAD@{2}: commit: feat: got vpc flow logs log group name :b:
+[33m2cf0c6d[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{3}: commit: feat: get log groups name output
+[33m9f4afcf[m HEAD@{4}: commit: feat: got sns arn outputs
+[33mfa54c7a[m HEAD@{5}: merge sns: Merge made by the 'ort' strategy.
+[33mc4ae1f0[m HEAD@{6}: checkout: moving from sns to main
+[33ma192917[m[33m ([m[1;32msns[m[33m)[m HEAD@{7}: commit: feat: create sns subscription
+[33m036d040[m HEAD@{8}: commit: feat: create sns topics
+[33m7149692[m HEAD@{9}: commit: feat: create basic strcuture for sns
+[33mc4ae1f0[m HEAD@{10}: checkout: moving from main to sns
+[33mc4ae1f0[m HEAD@{11}: merge cloudwatch: Merge made by the 'ort' strategy.
+[33mafcfd62[m HEAD@{12}: checkout: moving from cloudwatch to main
+[33m2f299c6[m[33m ([m[1;32mcloudwatch[m[33m)[m HEAD@{13}: commit: feat: create performance metrics
+[33m3456c03[m HEAD@{14}: commit: create: advance bytes in anomaly metrics
+[33m3f73801[m HEAD@{15}: commit: feat: create DDos (high bytes in) alarm
+[33m6a1b5dc[m HEAD@{16}: commit: feat: create DDoS filter metrics
+[33m603cf86[m HEAD@{17}: commit: feat: create log metrics filter
+[33mafcfd62[m HEAD@{18}: pull origin main: Fast-forward
+[33m5955257[m HEAD@{19}: checkout: moving from main to cloudwatch
+[33mafcfd62[m HEAD@{20}: checkout: moving from cloudwatch to main
+[33m5955257[m HEAD@{21}: checkout: moving from cloudwatch to cloudwatch
+[33m5955257[m HEAD@{22}: checkout: moving from main to cloudwatch
+[33mafcfd62[m HEAD@{23}: commit: feat: disable workflow
+[33m30a425a[m HEAD@{24}: commit: feat: rename cloudwatch module to cloudwatchlogs
+[33m5955257[m HEAD@{25}: checkout: moving from cloudwatch to main
+[33m5955257[m HEAD@{26}: checkout: moving from main to cloudwatch
+[33m5955257[m HEAD@{27}: commit: fix : for each error
+[33m563dfc4[m HEAD@{28}: commit: fix : list type error :accordion:
+[33ma07acbe[m HEAD@{29}: commit: fix : not support resource type
+[33ma239262[m HEAD@{30}: commit: fix : jsonencode error
+[33m819e17c[m HEAD@{31}: commit: fix : older terraform version error
+[33m6bc34b1[m HEAD@{32}: commit: fix: transit iam role arn error
+[33m8879939[m HEAD@{33}: commit: chor: enable workflow :avocado:
+[33m292f8ee[m HEAD@{34}: commit: feat : complete Transit flow log section
+[33md302407[m HEAD@{35}: commit: refactor : Log All Attachments Together (Simplest)
+[33m450324c[m HEAD@{36}: commit: feat: call all modules related to vpc flow logs
+[33m6e66c8c[m HEAD@{37}: commit: feat: get log group arn
+[33md13ec4f[m HEAD@{38}: commit: feat: complete vpc flow log section
+[33mcdf36b4[m HEAD@{39}: commit: feat: roughly complete transit gateway flow log section
+[33m3fff017[m HEAD@{40}: commit: feat: create basic cloudwatch log group
+[33m55d32b3[m HEAD@{41}: commit: chor: remove uunnecassary module
+[33m97db7bf[m HEAD@{42}: commit: chor: disable workflow
+[33mf0ecfba[m HEAD@{43}: merge s3: Merge made by the 'ort' strategy.
+[33m462ca24[m HEAD@{44}: checkout: moving from s3 to main
+[33m01128a9[m[33m ([m[1;32ms3[m[33m)[m HEAD@{45}: commit: feat: add var and outs for s3
+[33m0995dd0[m HEAD@{46}: commit: feat: create s3 bucket basic things
+[33m462ca24[m HEAD@{47}: checkout: moving from main to s3
+[33m462ca24[m HEAD@{48}: merge transit-role: Merge made by the 'ort' strategy.
+[33m5436d74[m HEAD@{49}: checkout: moving from transit-role to main
+[33m6bc38b6[m[33m ([m[1;32mtransit-role[m[33m)[m HEAD@{50}: commit: feat: output iam role arn
+[33m6873dca[m HEAD@{51}: commit: feat: create iam role for transit gateway
+[33m5436d74[m HEAD@{52}: checkout: moving from main to transit-role
+[33m5436d74[m HEAD@{53}: merge vpc-role: Merge made by the 'ort' strategy.
+[33mc79fe9c[m HEAD@{54}: checkout: moving from vpc-role to main
+[33mabab17f[m[33m ([m[1;32mvpc-role[m[33m)[m HEAD@{55}: commit: feat: roughly complete vpc flow log iam role
+[33mc79fe9c[m HEAD@{56}: checkout: moving from main to vpc-role
+[33mc79fe9c[m HEAD@{57}: commit: fix : depend on error fix
+[33mfbc85e2[m HEAD@{58}: commit: feat: create public and private route connection to route tables
+[33m07efdda[m HEAD@{59}: commit: chor: comment update route
+[33m78ad8a7[m HEAD@{60}: commit: feat: add depends on to update route
+[33m6cfaccc[m HEAD@{61}: commit: feat: call update route module
+[33m97f6224[m HEAD@{62}: commit: feat: roughly set tgw route module
+[33m800d2b5[m HEAD@{63}: commit: feat(server-sg) : remove because its not neccesary
+[33m2c269e9[m HEAD@{64}: commit: feat: allow_icmp for sg and nacl
+[33m1406b4b[m HEAD@{65}: commit: fix: subnet id error
+[33md3e792d[m HEAD@{66}: commit: fix: add depend on for tgw attachment
+[33m37e9cff[m HEAD@{67}: commit: chor: call only one az
+[33m8b9d9d1[m HEAD@{68}: commit: feat: Attach only one private subnet per AZ to the TGW
+[33mda92779[m HEAD@{69}: commit: feat: test tgw
+[33m848a86a[m HEAD@{70}: commit: feat: create set route module
+[33m6538d1d[m HEAD@{71}: commit: refactor : comment gateway attachment
+[33m2b34891[m HEAD@{72}: commit: fix : tags error ⛽
+[33m670d17e[m HEAD@{73}: commit: feat: call transit gateway
+[33m1a912e7[m HEAD@{74}: commit: feat: create transit gateway attachment
+[33m6f6e122[m HEAD@{75}: commit: feat: update gateway dns support and output gateway id
+[33m80eec18[m HEAD@{76}: commit: refactor : enable workflow
+[33md86eced[m HEAD@{77}: commit: fix : sg error :american_samoa:
+[33m7a215a8[m HEAD@{78}: commit: refactor : comments outputs
+[33m536858f[m HEAD@{79}: commit: refactor: call vpc, public ec2 and gateway
+[33m3605328[m HEAD@{80}: commit: refactor : comment some function for testing purpopse
+[33m18534ae[m HEAD@{81}: commit: feat: create server security group
+[33m40da623[m HEAD@{82}: commit: fix : public rt count issue :anger:
+[33m89fd508[m HEAD@{83}: commit: chor: enable workflow
+[33m19faea4[m HEAD@{84}: commit: refactor : only check 2 vpc with multy az
+[33m3924298[m HEAD@{85}: commit: feat(networking): implement multi-AZ NAT Gateway and public routing
+[33m956979c[m HEAD@{86}: commit: chor: disable workflow
+[33mff5e16a[m HEAD@{87}: commit: refactor: disable transgateway
+[33m88e8ecd[m HEAD@{88}: commit: fix : subnet issue
+[33m7b21615[m HEAD@{89}: commit: fix : add depend on feature
+[33m7c03e5b[m HEAD@{90}: commit: fix: add depend on part
+[33md13fa26[m HEAD@{91}: commit: fix : rt name issue :accordion:
+[33mad1e3d1[m HEAD@{92}: commit: chor: enble workflow again :adhesive_bandage:
+[33mb283396[m HEAD@{93}: commit: feat: set some tgw id outputs
+[33m8a0e30a[m HEAD@{94}: commit: fix : wrong destination issue
+[33m6827e17[m HEAD@{95}: commit: feat: call tgw module
+[33m9e996b5[m HEAD@{96}: commit: feat: add necessary output values
+[33m1f7510d[m HEAD@{97}: commit: feat: roughly complete transit gw and routes
+[33m54cb42d[m HEAD@{98}: commit: feat: create basic folder structure for transit gateway
+[33ma23b705[m HEAD@{99}: commit: chor: disable workflow
+[33mcefa5cd[m HEAD@{100}: commit: chor: private,public submet id conflict 🎱
+[33m8ccf139[m HEAD@{101}: commit: chor: change key to server-key
+[33mce9c707[m HEAD@{102}: commit: fix : :abacus:
+[33m93cd8e5[m HEAD@{103}: commit: fix: comment provider conflict
+[33m1f09270[m HEAD@{104}: commit: chor: re enable auto workflow
+[33mef9b34c[m HEAD@{105}: pull --tags origin main: Fast-forward
+[33m1e2425e[m HEAD@{106}: commit: chor: disable auto workflow
+[33mcdfe701[m HEAD@{107}: commit: feat: create destroy workflow
+[33mf222a0d[m HEAD@{108}: commit: fix : region provider error
+[33m3148778[m HEAD@{109}: commit: fix : vpc region issue
+[33mf4ab70a[m HEAD@{110}: commit: fix: key pair name issue
+[33m12203b2[m HEAD@{111}: commit: fix : id issue
+[33m24dc046[m HEAD@{112}: commit: fix : duplicate ec2 instance issue
+[33mffff7cd[m HEAD@{113}: commit: c
