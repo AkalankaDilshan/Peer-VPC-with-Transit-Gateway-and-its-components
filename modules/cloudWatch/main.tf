@@ -89,7 +89,7 @@ resource "aws_cloudwatch_metric_alarm" "bytes_in_anomaly_advance" {
 # ---1.METRIC FILTERS (HighLatency)
 resource "aws_cloudwatch_log_metric_filter" "high_latency" {
   name           = "HighLatencyFlows"
-  pattern        = "[version, account, eni, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action, log_status] | filter (end - start) > 100"
+  pattern        = "[version, account, eni, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action, log_status]"
   log_group_name = var.vpc_flow_logs_name
 
   metric_transformation {
