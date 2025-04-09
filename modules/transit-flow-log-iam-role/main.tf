@@ -28,6 +28,13 @@ data "aws_iam_policy_document" "polices" {
     ]
     resources = ["*"]
   }
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:*"
+    ]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_policy" "custom_policy" {
