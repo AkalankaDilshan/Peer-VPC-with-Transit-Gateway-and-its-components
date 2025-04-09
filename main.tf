@@ -88,7 +88,7 @@ module "vpc_flowlog_s3_bucket" {
 }
 
 module "vpc_flowlog_cloudwatch_logs_group" {
-  source         = "./modules/cloudWatch"
+  source         = "./modules/cloudWatch_logs"
   log_group_name = "vpc-flow-logs"
 }
 
@@ -112,7 +112,7 @@ module "transit_flowlog_s3_bucket" {
 }
 
 module "transit_flowlog_cloudwatch_logs_group" {
-  source         = "./modules/cloudWatch"
+  source         = "./modules/cloudWatch_logs"
   log_group_name = "tgw-flow-logs"
 }
 
