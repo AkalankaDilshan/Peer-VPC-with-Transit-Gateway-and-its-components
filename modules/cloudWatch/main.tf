@@ -84,3 +84,30 @@ resource "aws_cloudwatch_metric_alarm" "bytes_in_anomaly_advance" {
 # TODO : Security Threats (Port Scans, Brute Force) metrics 
 
 
+#*****************Performance Metrics*******
+
+# ---1.METRIC FILTERS (HighLatency)
+resource "aws-aws_cloudwatch_log_metric_filter" "high_latency" {
+  name           = "HighLatencyFlows"
+  pattern        = "[version, account, eni, srcaddr, dstaddr, srcport, dstport, protocol, packets, bytes, start, end, action, log_status] | filter (end - start) > 100"
+  log_group_name = var.vpc_flow_logs_name
+
+  metric_transformation {
+    name      = "HighLatencyCount"
+    namespace = "Custom/VPCFlowLogs"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "latency_alarm" {
+  alarm_name          = "Network-HighLatency"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "5"
+  metric_name         = "HighLatencyCount"
+  namespace           = "Custom/VPCFlowLogs"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "100"
+  alarm_description   = "Network latency exceeds 100ms"
+  alarm_actions       = [var.sns_performance_alerts_arn]
+}
