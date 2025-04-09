@@ -22,3 +22,9 @@ variable "s3_bucket_arn" {
   description = "for save flow logs"
   type        = string
 }
+
+variable "s3_prefix" {
+  description = "Prefix for S3 flow logs"
+  type        = string
+  default     = "flow-logs"
+}
