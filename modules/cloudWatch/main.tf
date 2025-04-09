@@ -38,3 +38,17 @@ resource "aws_cloudwatch_log_metric_filter" "bytes_in_anomaly" {
   }
 }
 
+# --- 2. ALARMS ----
+resource "aws_cloudwatch_metric_alarm" "high_bytes_in" {
+  alarm_name          = "DDoS-Possible-HighBytesIn"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1" # immediate alert 
+  metric_name         = "BytesInPerMinute"
+  namespace           = "Custom/VPCFlowLogs"
+  period              = "60" # 1 min adjust it base on your baseline 
+  statistic           = "Sum"
+  threshold           = "100000000" # 100 MB/min (customize)
+  alarm_description   = "Traffic spike detected (possible DDos)"
+  alarm_actions       = [var.sns_security_alerts_arn]
+}
+
