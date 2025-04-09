@@ -2,6 +2,7 @@ resource "random_string" "bucket_suffix" {
   length  = 6
   special = false
   upper   = false
+  numeric = false
 }
 
 resource "aws_s3_bucket" "flow_logs_bucket" {
