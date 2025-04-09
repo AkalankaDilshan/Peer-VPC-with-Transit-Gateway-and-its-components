@@ -5,7 +5,7 @@ resource "random_string" "bucket_suffix" {
 }
 
 resource "aws_s3_bucket" "flow_logs_bucket" {
-  bucket        = "${var.bucket_prefix}-${random_string.bucket_suffix.result}"
+  bucket        = "${var.bucket_prefix}_${random_string.bucket_suffix.result}"
   force_destroy = true
 
   tags = {
@@ -14,11 +14,11 @@ resource "aws_s3_bucket" "flow_logs_bucket" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "bucket_access" {
-  bucket = aws_s3_bucket.flow_logs_bucket.id
+# resource "aws_s3_bucket_public_access_block" "bucket_access" {
+#   bucket = aws_s3_bucket.flow_logs_bucket.id
 
-  block_public_acls       = false
-  block_public_policy     = false
-  ignore_public_acls      = false
-  restrict_public_buckets = false
-}
+#   block_public_acls       = false
+#   block_public_policy     = false
+#   ignore_public_acls      = false
+#   restrict_public_buckets = false
+# }
