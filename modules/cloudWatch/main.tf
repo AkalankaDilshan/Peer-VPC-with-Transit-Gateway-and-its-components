@@ -71,9 +71,10 @@ resource "aws_cloudwatch_metric_alarm" "bytes_in_anomaly_advance" {
   }
 
   metric_query {
-    id = "m1"
+    id          = "m1"
+    return_data = "true"
     metric {
-      metric_name = "BytesInPerMinuteAdvacne"
+      metric_name = "BytesInPerMinuteAdvacne" # Note: Typo in "Advacne" - should this be "Advance"?
       namespace   = "Custom/VPCFlowLogs"
       period      = "300"
       stat        = "Sum"
